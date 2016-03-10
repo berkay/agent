@@ -1,0 +1,12 @@
+{
+ "Neptune" : {
+    "ApiKey": "API_KEY_HERE",
+    "Endpoint": "END_POINT_HERE"
+ },
+ "Agent" : {
+   "AssignedHostname":"ASSIGNED_HOSTNAME_HERE",
+   "LogFile":"AGENT_LOG_HERE",
+   "DebugMode":false,
+   "GithubApiKey":"GITHUB_KEY_HERE"
+ }
+}
