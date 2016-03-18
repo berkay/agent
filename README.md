@@ -11,6 +11,8 @@ Please see http://docs.neptune.io/docs/agent-administration
 Please see FAQs at http://docs.neptune.io/docs/agent-faqs
 
 # Architecture
+![Agent Architecture](/NeptuneAgentArchitecture.png?raw=true)
+
 Read more at http://docs.neptune.io/docs/agent-faqs#architecture-and-more
 
 # Contributing
