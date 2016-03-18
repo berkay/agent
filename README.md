@@ -1,8 +1,8 @@
-# Neptuen agent
-Neptune agent is a lightweight piece of software written in GO, which runs on your servers to run runbooks and report the results back to Neptune.io service. We use agents to accomplish this because they provide an easy way to run runbooks without exposing any open ports and without requiring SSH access to your servers.
+# Neptune agent
+Neptune agent is a lightweight piece of software written in GO, which runs on your servers to run runbooks and report the results back to Neptune. We use an agent to accomplish this because it provides an easy way to run runbooks without exposing any open ports and without requiring SSH access to your servers.
 
 # Installation
-Documenation is available at http://docs.neptune.io/docs/agent-installation
+Documentation is available at http://docs.neptune.io/docs/agent-installation
 
 # Administration
 Please see http://docs.neptune.io/docs/agent-administration
