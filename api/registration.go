@@ -18,7 +18,7 @@ import (
 const (
 	// Agent's current version.
 	// Note: We should improve the versioning logic to avoid hard-coding like this.
-	AgentVersion = "1.1.1"
+	AgentVersion = "1.1.2"
 )
 
 // Message sent by Agent to Neptune.io service to register itself.
