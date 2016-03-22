@@ -170,14 +170,14 @@ func (s *darwinLaunchdService) Start() error {
 	if err != nil {
 		return err
 	}
-	return run("launchctl", "load", "-w", confPath)
+	return run("launchctl", "load", confPath)
 }
 func (s *darwinLaunchdService) Stop() error {
 	confPath, err := s.getServiceFilePath()
 	if err != nil {
 		return err
 	}
-	return run("launchctl", "unload", "-w", confPath)
+	return run("launchctl", "unload", confPath)
 }
 func (s *darwinLaunchdService) Restart() error {
 	err := s.Stop()

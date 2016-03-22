@@ -52,14 +52,10 @@ func (s sysLogger) Infof(format string, a ...interface{}) error {
 }
 
 func run(command string, arguments ...string) error {
-	fmt.Println("Running command with args", command, arguments)
 	cmd := exec.Command(command, arguments...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println("Error", err)
 		return fmt.Errorf("%q failed: %v, %s", command, err, out)
 	}
-	fmt.Println(cmd.ProcessState.Success())
-	fmt.Println(string(out))
 	return nil
 }

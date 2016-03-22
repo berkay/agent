@@ -27,8 +27,8 @@ import (
 )
 
 const (
-	// Currently we truncate the runbook execution output to 10MB.
-	maxActionOutputSize = 10 * 1024 * 1024 // 10MB
+	// Currently we truncate the runbook execution output to 2MB.
+	maxActionOutputSize = 2 * 1024 * 1024 // 10MB
 	filePathSeparator   = "/"
 
 	// All the events/SQS messages older than 10min are discarded as stale.

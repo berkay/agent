@@ -4,120 +4,133 @@
 	"package": [
 		{
 			"path": "github.com/Sirupsen/logrus",
-			"revision": "cdaedc68f2894175ac2b3221869685602c759e71",
-			"revisionTime": "2015-11-23T03:15:15-05:00"
+			"revision": "4b6ea7319e214d98c938f12692336f7ca9348d6b",
+			"revisionTime": "2016-03-17T14:11:10Z"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/awserr",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/awsutil",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/client",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/client/metadata",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/corehandlers",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/credentials",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/defaults",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/ec2metadata",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/request",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/aws/session",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/endpoints",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
+		},
+		{
+			"path": "github.com/aws/aws-sdk-go/private/protocol",
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/protocol/query",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/protocol/query/queryutil",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/protocol/rest",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/private/signer/v4",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
 			"path": "github.com/aws/aws-sdk-go/service/sqs",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "4da0bec8953a0a540f391930a946917b12a95671",
+			"revisionTime": "2016-03-17T16:54:49-07:00"
 		},
 		{
-			"origin": "github.com/aws/aws-sdk-go/vendor/github.com/go-ini/ini",
 			"path": "github.com/go-ini/ini",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "12f418cc7edc5a618a51407b7ac1f1f512139df3",
+			"revisionTime": "2016-03-21T19:18:31-04:00"
+		},
+		{
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "8d92cf5fc15a4382f8964b08e1f42a75c0591aa3",
+			"revisionTime": "2016-03-19T05:57:00+11:00"
 		},
 		{
 			"path": "github.com/google/go-github/github",
-			"revision": "44b1ede22d71e26fa5d7af7a50204f7e6daadfc8",
-			"revisionTime": "2015-11-25T23:26:20-08:00"
+			"revision": "44e82c5a7abba7d29f280e21d1e5a0a4fae9c35e",
+			"revisionTime": "2016-03-21T17:04:17+13:00"
 		},
 		{
-			"origin": "github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath",
+			"path": "github.com/google/go-querystring/query",
+			"revision": "6bb77fe6f42b85397288d4f6f67ac72f8f400ee7",
+			"revisionTime": "2016-02-17T19:51:18-05:00"
+		},
+		{
 			"path": "github.com/jmespath/go-jmespath",
-			"revision": "9d7bc2d6ca2ada0468f705f0e9725ca97f8550c8",
-			"revisionTime": "2015-11-23T19:39:42-08:00"
+			"revision": "0b12d6b521d83fc7f755e7cfc1b1fbdd35a01a74",
+			"revisionTime": "2016-02-02T10:50:14-08:00"
 		},
 		{
 			"path": "github.com/kardianos/osext",
