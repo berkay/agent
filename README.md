@@ -7,8 +7,8 @@ Documentation is available at http://docs.neptune.io/docs/agent-installation
 # Administration
 Please see http://docs.neptune.io/docs/agent-administration
 
-# Architecture white paper (attack vectors and threat model)
-Please see https://s3.amazonaws.com/prod-neptuneio-downloads/security/agent/NeptuneArchitectureWhitePaper.pdf
+# Architecture white paper 
+This document has more details about threat model and different attack vectors. Please see https://s3.amazonaws.com/prod-neptuneio-downloads/security/agent/NeptuneArchitectureWhitePaper.pdf
 
 # Agent FAQs
 Please see FAQs at http://docs.neptune.io/docs/agent-faqs
