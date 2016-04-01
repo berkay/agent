@@ -35,6 +35,8 @@ generate_artifact "darwin" "amd64"
 #generate_artifact "freebsd" "386"
 
 # ARM artifacts
+generate_arm_artifact "linux" "ARMv5"
+generate_arm_artifact "linux" "ARMv6"
 generate_arm_artifact "linux" "ARMv7"
 generate_arm_artifact "linux" "ARMv8"
 

@@ -9,16 +9,30 @@ fi
 
 export GOOS=${1}
 GOARCH=${2}
-if [[ "$GOARCH" == "ARMv7" ]]; then
+
+case $GOARCH in
+"ARMv5")
+    export GOARM=5
+    ARCH="armv5"
+    GOARCH=""
+    ;;
+"ARMv6")
+    export GOARM=6
+    ARCH="armv6"
+    GOARCH=""
+    ;;
+"ARMv7")
     export GOARM=7
     ARCH="armv7"
     GOARCH=""
-else
+    ;;
+*)
     # For ARMv8 and later versions, set GOARCH instead of GOARM as per instructions at
     # https://github.com/golang/go/wiki/GoArm
     export GOARCH="arm64"
     ARCH="armv8"
-fi
+    ;;
+esac
 
 BUILD_VERSION=${3}
 NAME="neptune-agent"
