@@ -20,12 +20,7 @@ const (
 // Fields type, used to pass to key value pairs.
 type Fields map[string]interface{}
 
-var log *logrus.Logger
-
-func init() {
-	// Create a new instance of the logger. You can have any number of instances.
-	log = logrus.New()
-}
+var log = logrus.New()
 
 func convertToLogrusFields(fields Fields) logrus.Fields {
 	result := logrus.Fields{}
