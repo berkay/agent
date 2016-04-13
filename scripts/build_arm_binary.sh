@@ -14,25 +14,27 @@ case $GOARCH in
 "ARMv5")
     export GOARM=5
     ARCH="armv5"
-    GOARCH=""
+    GOARCH="arm"
     ;;
 "ARMv6")
     export GOARM=6
     ARCH="armv6"
-    GOARCH=""
+    GOARCH="arm"
     ;;
 "ARMv7")
     export GOARM=7
     ARCH="armv7"
-    GOARCH=""
+    GOARCH="arm"
     ;;
 *)
     # For ARMv8 and later versions, set GOARCH instead of GOARM as per instructions at
     # https://github.com/golang/go/wiki/GoArm
-    export GOARCH="arm64"
+    GOARCH="arm64"
     ARCH="armv8"
     ;;
 esac
+
+export GOARCH=${GOARCH}
 
 BUILD_VERSION=${3}
 NAME="neptune-agent"
