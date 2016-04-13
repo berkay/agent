@@ -1,6 +1,6 @@
 // Package config is responsible for parsing the agent config file, command-line params
 // and coming up with the final config.
-package config
+package agent
 
 import (
 	"encoding/json"

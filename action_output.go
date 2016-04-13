@@ -1,13 +1,12 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"errors"
 	"strconv"
 
-	"github.com/neptuneio/agent/config"
 	"github.com/neptuneio/agent/logging"
 
 	"gopkg.in/jmcvetta/napping.v3"
@@ -30,7 +29,7 @@ type ActionOutputMessage struct {
 }
 
 // Function to upload runbook execution results to Neptune.io service.
-func SendActionOutput(configObj *config.NeptuneConfig, request *ActionOutputMessage) error {
+func SendActionOutput(configObj *NeptuneConfig, request *ActionOutputMessage) error {
 
 	logging.Debug("Sending action output to Neptune.", logging.Fields{"request": *request})
 	response := Response{}

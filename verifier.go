@@ -1,7 +1,7 @@
 // Package security is responsible for verifying the integrity of received SQS messages
 // before agent processes them. Currently, Neptune.io signs all the messages with a private key
 // and Agent verifies the message signature with public key before processing the message.
-package security
+package agent
 
 import (
 	"crypto"

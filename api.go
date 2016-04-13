@@ -1,7 +1,7 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"strings"

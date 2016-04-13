@@ -1,7 +1,7 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"bufio"
@@ -10,7 +10,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/neptuneio/agent/config"
 	"github.com/neptuneio/agent/logging"
 
 	"gopkg.in/jmcvetta/napping.v3"
@@ -48,7 +47,7 @@ func shouldUploadLogs(filename string) bool {
 }
 
 // Function to upload agent logs to Neptune.io service.
-func UploadLogs(configObj *config.NeptuneConfig, filename string, agentId string) error {
+func UploadLogs(configObj *NeptuneConfig, filename string, agentId string) error {
 	if !shouldUploadLogs(filename) {
 		return nil
 	}

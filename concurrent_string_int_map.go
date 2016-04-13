@@ -1,5 +1,5 @@
 // Package util contains the utility code used in Neptune.io agent.
-package util
+package agent
 
 import (
 	"encoding/json"

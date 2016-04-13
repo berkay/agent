@@ -1,16 +1,14 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"errors"
 	"strconv"
 	"time"
 
-	"github.com/neptuneio/agent/config"
 	"github.com/neptuneio/agent/logging"
-	"github.com/neptuneio/agent/metadata"
 
 	"gopkg.in/jmcvetta/napping.v3"
 )
@@ -18,7 +16,7 @@ import (
 const (
 	// Agent's current version.
 	// Note: We should improve the versioning logic to avoid hard-coding like this.
-	AgentVersion = "1.1.2"
+	AgentVersion = "1.1.3"
 )
 
 // Message sent by Agent to Neptune.io service to register itself.
@@ -51,7 +49,7 @@ type RegistrationInfo struct {
 // Time at which this agent has started.
 var startTime = time.Now().Unix() * 1000
 
-func getAgentRegistrationRequest(data metadata.HostMetaData) RegistrationRequest {
+func getAgentRegistrationRequest(data HostMetaData) RegistrationRequest {
 	return RegistrationRequest{
 		AgentVersion:       AgentVersion,
 		Hostname:           data.HostName,
@@ -69,7 +67,7 @@ func getAgentRegistrationRequest(data metadata.HostMetaData) RegistrationRequest
 }
 
 // Function to register this agent with Neptune.io service.
-func RegisterAgent(data metadata.HostMetaData, configObj *config.NeptuneConfig) (*RegistrationInfo, error) {
+func RegisterAgent(data HostMetaData, configObj *NeptuneConfig) (*RegistrationInfo, error) {
 	request := getAgentRegistrationRequest(data)
 	response := RegistrationInfo{}
 	logging.Info("Registering the agent.", logging.Fields{"request": request})

@@ -1,7 +1,7 @@
 // Package executor is responsible for executing runbooks on agent machine.
 // This will have logic to fetch Github runbooks if the agent is configured to use
 // Github.
-package executor
+package agent
 
 import (
 	"bytes"
@@ -16,10 +16,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/neptuneio/agent/api"
 	"github.com/neptuneio/agent/logging"
-	"github.com/neptuneio/agent/state"
-	"github.com/neptuneio/agent/worker"
 
 	"github.com/google/go-github/github"
 
@@ -116,9 +113,9 @@ func writeToTmpFile(eventId, runbookName string, rawCmd *string) (string, error)
 	return fileName, nil
 }
 
-func sendActionOutput(regInfo *api.RegistrationInfo, actionOutputs chan<- *api.ActionOutputMessage,
-	event *api.Event, stdout, stderr string, status string, statusCode int, timeout bool) error {
-	actionOutputs <- &api.ActionOutputMessage{
+func sendActionOutput(regInfo *RegistrationInfo, actionOutputs chan<- *ActionOutputMessage,
+	event *Event, stdout, stderr string, status string, statusCode int, timeout bool) error {
+	actionOutputs <- &ActionOutputMessage{
 		RuleName:         event.RuleName,
 		RuleId:           event.RuleId,
 		HostName:         event.Hostname,
@@ -141,7 +138,7 @@ func sendActionOutput(regInfo *api.RegistrationInfo, actionOutputs chan<- *api.A
 }
 
 // Function to execute the runbook in the given temp file.
-func execute(regInfo *api.RegistrationInfo, event *api.Event, tmpFile string) (string, int, bool, string, string) {
+func execute(regInfo *RegistrationInfo, event *Event, tmpFile string) (string, int, bool, string, string) {
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
 		if strings.HasSuffix(tmpFile, ".ps1") {
@@ -176,7 +173,7 @@ func execute(regInfo *api.RegistrationInfo, event *api.Event, tmpFile string) (s
 	exitError := cmd.Start()
 
 	// Immediately delete the SQS message since the command has started.
-	worker.DeleteMessage(regInfo, &event.ReceiptHandle)
+	DeleteMessage(regInfo, &event.ReceiptHandle)
 
 	if exitError != nil {
 		logging.Error("Could not start the command.", logging.Fields{"error": exitError})
@@ -232,14 +229,14 @@ func execute(regInfo *api.RegistrationInfo, event *api.Event, tmpFile string) (s
 // 3. If the agent is configured to execute only Github runbooks, it double checks that the event contains
 //    Github runbook link and agent configuration has the Github access key.
 // The event will be discarded and SQS message will be deleted if any of the above checks fail.
-func ExecuteAction(event *api.Event, regInfo *api.RegistrationInfo, actionOutputs chan<- *api.ActionOutputMessage, githubKey string) error {
+func ExecuteAction(event *Event, regInfo *RegistrationInfo, actionOutputs chan<- *ActionOutputMessage, githubKey string) error {
 
 	// Check if this event was already processed. This guards against duplicate events, just in case.
-	if state.HasProcessedEvent(event.EventId) {
+	if HasProcessedEvent(event.EventId) {
 		logging.Info("Discarding the event since it was already processed.", logging.Fields{"eventId": event.EventId})
 
 		// Delete this event from SQS.
-		worker.DeleteMessage(regInfo, &event.ReceiptHandle)
+		DeleteMessage(regInfo, &event.ReceiptHandle)
 		return nil
 	}
 
@@ -250,7 +247,7 @@ func ExecuteAction(event *api.Event, regInfo *api.RegistrationInfo, actionOutput
 			logging.Fields{"eventId": event.EventId, "timestamp": event.Timestamp})
 
 		// Delete this event from SQS.
-		worker.DeleteMessage(regInfo, &event.ReceiptHandle)
+		DeleteMessage(regInfo, &event.ReceiptHandle)
 		return nil
 	}
 
@@ -260,7 +257,7 @@ func ExecuteAction(event *api.Event, regInfo *api.RegistrationInfo, actionOutput
 		logging.Error("Agent is configured to run Github runbooks only but received Neptune runbook."+
 			" Dropping and deleting the event.", logging.Fields{"eventId": event.EventId})
 		// Delete this event from SQS.
-		worker.DeleteMessage(regInfo, &event.ReceiptHandle)
+		DeleteMessage(regInfo, &event.ReceiptHandle)
 		return nil
 	}
 
@@ -292,7 +289,7 @@ func ExecuteAction(event *api.Event, regInfo *api.RegistrationInfo, actionOutput
 	defer os.Remove(tmpFile)
 
 	// Persist the event so that we don't rerun the action for this event again.
-	if err := state.PersistEvent(event); err != nil {
+	if err := PersistEvent(event); err != nil {
 		logging.Error("Could not persist the event.", logging.Fields{"error": err})
 	}
 
@@ -312,7 +309,7 @@ func ExecuteAction(event *api.Event, regInfo *api.RegistrationInfo, actionOutput
 	if e != nil {
 		logging.Error("Could not queue the action output for Neptune", logging.Fields{"error": e})
 	} else {
-		api.UpdateStatus(api.Active)
+		UpdateStatus(Active)
 	}
 
 	return e

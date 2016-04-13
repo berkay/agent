@@ -1,5 +1,5 @@
 // Package metadata contains all the meta data used by the agent in registration protocol
-package metadata
+package agent
 
 import (
 	"errors"
@@ -11,7 +11,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/neptuneio/agent/config"
 	"github.com/neptuneio/agent/logging"
 )
 
@@ -79,7 +78,7 @@ func getLocalIP() string {
 
 // Function to get the complete meta data for the host on which agent is running.
 // This method tries to get cloud specific meta data also, in case the machine is in a cloud.
-func GetHostMetaData(agentConfig *config.AgentConfig) (HostMetaData, error) {
+func GetHostMetaData(agentConfig *AgentConfig) (HostMetaData, error) {
 	logging.Debug("Getting host metadata.", nil)
 
 	hostname, e := os.Hostname()

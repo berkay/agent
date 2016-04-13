@@ -1,7 +1,7 @@
 // Package state contains logic to maintain an event store on Agent to remember the recently
 // processed events. This helps in avoiding the processing of duplicate events, just in case an
 // agent receives duplicate events (which shouldn't happen ideally).
-package state
+package agent
 
 import (
 	"bufio"
@@ -10,9 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/neptuneio/agent/api"
 	"github.com/neptuneio/agent/logging"
-	"github.com/neptuneio/agent/util"
 	"path/filepath"
 )
 
@@ -22,12 +20,12 @@ const (
 	eventCleanupInterval = time.Second * 30 * 60 // Once every half hour
 )
 
-var eventIdToTimestamp = util.NewConcurrentMap()
+var eventIdToTimestamp = NewConcurrentMap()
 var eventReloadCh = time.NewTicker(eventCleanupInterval).C
-var eventPersistCh = make(chan *api.Event)
+var eventPersistCh = make(chan *Event)
 var eventsFilePath string
 
-func PersistEvent(event *api.Event) error {
+func PersistEvent(event *Event) error {
 	eventPersistCh <- event
 	return nil
 }
@@ -41,7 +39,7 @@ func InitializeEventsFile(dir string) {
 		// Reload the event ids into global map.
 		if err := reloadEventIds(); err != nil {
 			// If there was an issue in reloading events, initialize this to empty map.
-			eventIdToTimestamp = util.NewConcurrentMap()
+			eventIdToTimestamp = NewConcurrentMap()
 		}
 
 		for {
@@ -101,7 +99,7 @@ func reloadEventIds() error {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	concurrentMap := util.NewConcurrentMap()
+	concurrentMap := NewConcurrentMap()
 	for scanner.Scan() {
 		parts := strings.Split(scanner.Text(), eventIdTimestampSep)
 		if len(parts) > 1 {

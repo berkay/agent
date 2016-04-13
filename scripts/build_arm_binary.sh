@@ -39,7 +39,7 @@ NAME="neptune-agent"
 
 BUILD_PATH="pkg"
 BINARY_FILENAME="$NAME-$GOOS-$ARCH"
-SRC_FILE_PATH="cmd/agent/*.go"
+SRC_FILE_PATH="cmd/neptuneagent/*.go"
 
 echo -e "Building $NAME with:\n"
 

@@ -1,13 +1,10 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"os"
-
-	"github.com/neptuneio/agent/config"
-	"github.com/neptuneio/agent/metadata"
 
 	"gopkg.in/jmcvetta/napping.v3"
 )
@@ -19,8 +16,8 @@ var ErrorsChannel = make(chan string, 10)
 
 var (
 	regInfo       *RegistrationInfo
-	md            *metadata.HostMetaData
-	neptuneConfig *config.NeptuneConfig
+	md            *HostMetaData
+	neptuneConfig *NeptuneConfig
 	hostname      string
 )
 
@@ -46,7 +43,7 @@ func init() {
 	}()
 }
 
-func SetRegistrationInfo(reg *RegistrationInfo, metaData metadata.HostMetaData, nConfig config.NeptuneConfig) {
+func SetRegistrationInfo(reg *RegistrationInfo, metaData HostMetaData, nConfig NeptuneConfig) {
 	regInfo = reg
 	md = &metaData
 	neptuneConfig = &nConfig
@@ -73,6 +70,6 @@ func uploadError(msg string) {
 	if neptuneConfig != nil {
 		_, _ = napping.Post(joinURL(neptuneConfig.Endpoint, "upload_logs", neptuneConfig.ApiKey), &request, &response, nil)
 	} else {
-		_, _ = napping.Post(joinURL(config.DefaultBaseURL, "upload_logs", ""), &request, &response, nil)
+		_, _ = napping.Post(joinURL(DefaultBaseURL, "upload_logs", ""), &request, &response, nil)
 	}
 }

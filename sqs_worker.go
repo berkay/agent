@@ -1,6 +1,6 @@
 // Package worker is responsible for communicating with AWS SQS and handing over
 // the events to executor for runbook execution if the message passes all the checks.
-package worker
+package agent
 
 import (
 	"encoding/json"
@@ -8,9 +8,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/neptuneio/agent/api"
 	"github.com/neptuneio/agent/logging"
-	"github.com/neptuneio/agent/security"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -63,7 +61,7 @@ func changeMessageVisibility(svc *sqs.SQS, queue, receiptHandle string, timeout 
 }
 
 // Function to delete SQS message after the processing is done.
-func DeleteMessage(regInfo *api.RegistrationInfo, receiptHandle *string) error {
+func DeleteMessage(regInfo *RegistrationInfo, receiptHandle *string) error {
 	svc := getSQSClient(regInfo)
 
 	logging.Debug("Deleting the event from SQS.", nil)
@@ -107,7 +105,7 @@ func getMessages(svc *sqs.SQS, queue string) (*sqs.ReceiveMessageOutput, error) 
 	return resp, nil
 }
 
-func getSQSClient(regInfo *api.RegistrationInfo) *sqs.SQS {
+func getSQSClient(regInfo *RegistrationInfo) *sqs.SQS {
 	creds := credentials.NewStaticCredentials(regInfo.AWSAccessKey, regInfo.AWSSecretAccessKey, regInfo.AWSSecurityToken)
 	_, region := parseQueueDetails(regInfo.ActionQueueEndpoint)
 	awsConfig := aws.NewConfig().WithCredentials(creds).
@@ -130,7 +128,7 @@ func getSQSClient(regInfo *api.RegistrationInfo) *sqs.SQS {
 //    was not tampered. This guards against replaying old messages, etc.
 // 6. At this point, agent has decided to process the event. So, hide the SQS message for the action timeout
 //    and hand over the event to executor for runbook execution.
-func RunLoop(regInfo *api.RegistrationInfo, regInfoUpdatesCh <-chan string, eventsChannel chan<- *api.Event, regChannel chan<- time.Time) {
+func RunLoop(regInfo *RegistrationInfo, regInfoUpdatesCh <-chan string, eventsChannel chan<- *Event, regChannel chan<- time.Time) {
 
 	logging.Info("Initializing SQS client.", nil)
 	svc := getSQSClient(regInfo)
@@ -153,7 +151,7 @@ func RunLoop(regInfo *api.RegistrationInfo, regInfoUpdatesCh <-chan string, even
 			if resp, err := getMessages(svc, queue); err == nil {
 				shouldLogError = true
 				numFailures = 0
-				api.UpdateStatus(api.QueuePollingSucceeded)
+				UpdateStatus(QueuePollingSucceeded)
 				logging.Debug("Received messages.", logging.Fields{"count": len(resp.Messages)})
 
 				for _, msg := range resp.Messages {
@@ -176,8 +174,8 @@ func RunLoop(regInfo *api.RegistrationInfo, regInfoUpdatesCh <-chan string, even
 							continue
 						}
 
-						if valid, err := security.VerifyMessage(bodyStr, *signature.StringValue); valid && err == nil {
-							var event api.Event
+						if valid, err := VerifyMessage(bodyStr, *signature.StringValue); valid && err == nil {
+							var event Event
 							err = json.Unmarshal([]byte(bodyStr), &event)
 							if err != nil {
 								logging.Error("Could not deserialize the SQS message.", logging.Fields{"error": err})

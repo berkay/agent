@@ -1,13 +1,12 @@
 // Package api is responsible for communication between agent and Neptune.io service.
 // This includes the data structures and logic related to agent registration, heartbeating,
 // uploading runbook execution results, uploading agent errors, etc.
-package api
+package agent
 
 import (
 	"errors"
 	"strconv"
 
-	"github.com/neptuneio/agent/config"
 	"github.com/neptuneio/agent/logging"
 
 	"gopkg.in/jmcvetta/napping.v3"
@@ -19,7 +18,7 @@ type Heartbeat struct {
 }
 
 // Function to send a heartbeat to Neptune.io service.
-func Beat(configObj *config.NeptuneConfig, agentId string) error {
+func Beat(configObj *NeptuneConfig, agentId string) error {
 	request := Heartbeat{Status: CurrentStatus().String()}
 	response := Response{}
 

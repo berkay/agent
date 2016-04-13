@@ -1,6 +1,6 @@
 // +build !windows
 
-package executor
+package agent
 
 import (
 	"os/exec"
