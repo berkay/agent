@@ -30,6 +30,9 @@ const (
 
 	// All the events/SQS messages older than 10min are discarded as stale.
 	stalenessTimeout = 10 * 60 * 1000
+
+	// Shebang prefix used to detect if a script has shebang or not.
+	shebangPrefix = "#!"
 )
 
 var workingDir string
@@ -138,7 +141,7 @@ func sendActionOutput(regInfo *RegistrationInfo, actionOutputs chan<- *ActionOut
 }
 
 // Function to execute the runbook in the given temp file.
-func execute(regInfo *RegistrationInfo, event *Event, tmpFile string) (string, int, bool, string, string) {
+func execute(regInfo *RegistrationInfo, event *Event, tmpFile string, hasShebang bool) (string, int, bool, string, string) {
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
 		if strings.HasSuffix(tmpFile, ".ps1") {
@@ -147,8 +150,15 @@ func execute(regInfo *RegistrationInfo, event *Event, tmpFile string) (string, i
 			cmd = exec.Command(tmpFile)
 		}
 	} else {
-		cmd = exec.Command("/bin/sh", "-c", tmpFile)
+		// Execute the script directly if it has shebang.
+		if hasShebang {
+			cmd = exec.Command(tmpFile);
+		} else {
+			// Otherwise, run the script with /bin/sh
+			cmd = exec.Command("/bin/sh", "-c", tmpFile)
+		}
 	}
+
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -294,7 +304,7 @@ func ExecuteAction(event *Event, regInfo *RegistrationInfo, actionOutputs chan<-
 	}
 
 	// Execute the command and delete the SQS message after starting the command successfully.
-	status, code, timeout, stdout, stderr := execute(regInfo, event, tmpFile)
+	status, code, timeout, stdout, stderr := execute(regInfo, event, tmpFile, strings.HasPrefix(*runbookContent, shebangPrefix))
 
 	// Truncate the stderr and stdout to a maximum value.
 	if len(stdout) > maxActionOutputSize {
