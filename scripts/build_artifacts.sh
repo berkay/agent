@@ -25,7 +25,7 @@ echo $GOPATH
 # Clear out the pkg directory
 rm -rf pkg
 
-generate_artifact "windows" "386"
+generate_artifact "windows" "x86"
 generate_artifact "windows" "amd64"
 generate_artifact "linux" "amd64"
 generate_artifact "linux" "386"
